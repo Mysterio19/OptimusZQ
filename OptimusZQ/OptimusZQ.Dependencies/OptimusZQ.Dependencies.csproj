@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OptimusZQ.DAL\OptimusZQ.DAL.csproj" />
+    <ProjectReference Include="..\OptimusZQ.Services\OptimusZQ.Services.csproj" />
   </ItemGroup>
 
 </Project>

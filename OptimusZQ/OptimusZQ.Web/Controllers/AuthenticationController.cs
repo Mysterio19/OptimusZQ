@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using OptimusZQ.Services.Abstract;
 using OptimusZQ.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace OptimusZQ.Web.Controllers
 {
@@ -14,6 +8,12 @@ namespace OptimusZQ.Web.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        IAuthenticationService _authenticationService;
+        public AuthenticationController(IAuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
+
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody]LoginModel user)
         {
@@ -22,26 +22,18 @@ namespace OptimusZQ.Web.Controllers
                 return BadRequest("Invalid client request");
             }
 
-            if (user.UserName == "johndoe" && user.Password == "def@123")
+            if(_authenticationService.HasUser(user.UserName))
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["secretKey"]));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var token = _authenticationService.LogIn(user.UserName, user.Password);
 
-                var tokeOptions = new JwtSecurityToken(
-                    issuer: "http://localhost:5000",
-                    audience: "http://localhost:5000",
-                    claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signinCredentials
-                );
+                if(token != null)
+                {
+                    return Ok(new { Token = token });
+                }
 
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                return Ok(new { Token = tokenString });
             }
-            else
-            {
-                return Unauthorized();
-            }
+
+            return Unauthorized();
         }
 
     }

@@ -10,5 +10,7 @@ namespace OptimusZQ.Services.Abstract
 
         string LogIn(string userName, string password);
 
+        string RegisterUser(string userName, string password);
+
     }
 }

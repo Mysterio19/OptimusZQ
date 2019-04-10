@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using OptimusZQ.DAL;
+using OptimusZQ.Services.Abstract;
+using OptimusZQ.Services.Concrete;
 using System.Configuration;
 using System.Text;
 
@@ -18,7 +20,7 @@ namespace OptimusZQ.Dependencies
 
         public static void RegisterServices(this IServiceCollection services)
         {
-
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
         }
 
         public static void RegisterAuth(this IServiceCollection services)
