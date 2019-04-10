@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using OptimusZQ.DAL;
-using System;
 using System.Configuration;
+using System.Text;
 
 namespace OptimusZQ.Dependencies
 {
@@ -17,6 +19,22 @@ namespace OptimusZQ.Dependencies
         public static void RegisterServices(this IServiceCollection services)
         {
 
+        }
+
+        public static void RegisterAuth(this IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                
+                ValidIssuer = "http://localhost:5000",
+                ValidAudience = "http://localhost:5000",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["secretKey"]))};
+            });
         }
     }
 }
