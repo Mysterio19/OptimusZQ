@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using OptimusZQ.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OptimusZQ.DAL
 {
@@ -20,5 +16,13 @@ namespace OptimusZQ.DAL
         public DbSet<SharedFile> SharedFiles { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasMany(c => c.SharedFiles).WithOne(e => e.User);
+            modelBuilder.Entity<User>().HasMany(c => c.Folders).WithOne(e => e.User);
+            modelBuilder.Entity<Folder>().HasMany(c => c.Folders).WithOne(e => e.ParentFolder);
+            modelBuilder.Entity<Folder>().HasMany(c => c.Files).WithOne(e => e.Folder);  
+        }
     }
 }

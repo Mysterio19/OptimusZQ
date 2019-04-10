@@ -7,5 +7,7 @@ namespace OptimusZQ.DAL.Models
     public class SharedFile : File
     {
         public string Scopes { get; set; }
+
+        public User User { get; set; }
     }
 }
