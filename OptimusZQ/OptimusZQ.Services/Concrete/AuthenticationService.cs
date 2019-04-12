@@ -1,4 +1,7 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using OptimusZQ.DAL.Abstract;
+using OptimusZQ.DAL.Models;
 using OptimusZQ.Services.Abstract;
 using System;
 using System.Collections.Generic;
@@ -9,8 +12,13 @@ using System.Text;
 
 namespace OptimusZQ.Services.Concrete
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService : BaseService, IAuthenticationService
     {
+        private IRepository<User> _userRepository;
+        public AuthenticationService(IRepository<User> userRepository, IOptions<AppSettings> options) : base(options)
+        {
+            _userRepository = userRepository;
+        }
         public bool HasUser(string userName)
         {
             throw new NotImplementedException();

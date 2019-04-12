@@ -22,9 +22,14 @@ namespace OptimusZQ.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.RegisterDAL();
+            services.RegisterDAL(Configuration.GetSection("AppSettings").GetSection("connectionString").Value);
+
+            services.RegisterAuth(Configuration.GetSection("AppSettings").GetSection("secretKey").Value);
 
             services.RegisterServices();
+
+            services.MapSettings(Configuration);
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
