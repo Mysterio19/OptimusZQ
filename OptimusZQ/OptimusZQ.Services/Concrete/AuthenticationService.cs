@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OptimusZQ.DAL.Abstract;
 using OptimusZQ.DAL.Models;
 using OptimusZQ.Services.Abstract;
+using OptimusZQ.Services.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,19 +17,27 @@ namespace OptimusZQ.Services.Concrete
     public class AuthenticationService : BaseService, IAuthenticationService
     {
         private IUserRepository _userRepository;
-        private User _user;
+        private LoginModel _user;
+        private readonly IMapper _mapper;
 
-        public AuthenticationService(IUserRepository userRepository, IOptions<AppSettings> options) : base(options)
+        public AuthenticationService(IUserRepository userRepository, IOptions<AppSettings> options, IMapper mapper) : base(options)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
+
+        public LoginModel GetUserByUserLogin(string userLogin)
+        {
+            return _mapper.Map<LoginModel>(_userRepository.GetUserByLogin(userLogin));
+        }
+
         public bool HasUser(string userLogin)
         {
-            _user = _userRepository.GetUserByName(userLogin);
+            _user = GetUserByUserLogin(userLogin);
             return _user == null ? false : true;
         }
 
-        public string LogIn(string userName, string password)
+        public string LogIn(string userLogin, string password)
         {
             var paswordIsCorrect = _user.Password.Equals(password);
 
@@ -46,10 +56,10 @@ namespace OptimusZQ.Services.Concrete
 
                 return new JwtSecurityTokenHandler().WriteToken(tokeOptions);
             }
-            return "Password is incorrect";
+            return null;
         }
 
-        public string RegisterUser(string userName, string password)
+        public string RegisterUser(string login, string password)
         {
             throw new NotImplementedException();
         }

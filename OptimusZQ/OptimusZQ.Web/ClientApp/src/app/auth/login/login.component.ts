@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   login() {
     debugger
     this.loading = true;
-    this.authService.login(this.model.username, this.model.password)
+    this.authService.login(this.model.login, this.model.password)
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);

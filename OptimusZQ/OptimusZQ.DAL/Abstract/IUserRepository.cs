@@ -7,6 +7,6 @@ namespace OptimusZQ.DAL.Abstract
 {
     public interface IUserRepository : IRepository<User>
     {
-        User GetUserByName(string login);
+        User GetUserByLogin(string login);
     }
 }

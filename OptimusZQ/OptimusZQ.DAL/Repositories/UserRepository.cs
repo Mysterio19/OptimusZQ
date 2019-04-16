@@ -11,7 +11,7 @@ namespace OptimusZQ.DAL.Repositories
         {
         }
 
-        public User GetUserByName(string login)
+        public User GetUserByLogin(string login)
                    => DbContext
                     .Set<User>()
                     .FirstOrDefault(user => user.Login == login);
