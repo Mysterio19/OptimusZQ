@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { RegisterComponent } from './auth/register/register.component';
 
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
+import { JwtInterceptor } from './_helpers'
 
 @NgModule({
   declarations: [
@@ -39,7 +40,12 @@ import { UserService } from './_services/user.service';
   ],
   providers: [
     AuthenticationService,
-    UserService
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
