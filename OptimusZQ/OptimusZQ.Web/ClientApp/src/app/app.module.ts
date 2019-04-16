@@ -13,6 +13,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 
 import { AuthenticationService } from './_services/authentication.service';
+import { UserService } from './_services/user.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,10 @@ import { AuthenticationService } from './_services/authentication.service';
       { path: 'register', component: RegisterComponent },
     ])
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

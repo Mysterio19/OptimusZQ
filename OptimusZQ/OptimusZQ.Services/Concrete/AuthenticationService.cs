@@ -14,31 +14,39 @@ namespace OptimusZQ.Services.Concrete
 {
     public class AuthenticationService : BaseService, IAuthenticationService
     {
-        private IRepository<User> _userRepository;
-        public AuthenticationService(IRepository<User> userRepository, IOptions<AppSettings> options) : base(options)
+        private IUserRepository _userRepository;
+        private User _user;
+
+        public AuthenticationService(IUserRepository userRepository, IOptions<AppSettings> options) : base(options)
         {
             _userRepository = userRepository;
         }
-        public bool HasUser(string userName)
+        public bool HasUser(string userLogin)
         {
-            throw new NotImplementedException();
+            _user = _userRepository.GetUserByName(userLogin);
+            return _user == null ? false : true;
         }
 
         public string LogIn(string userName, string password)
         {
+            var paswordIsCorrect = _user.Password.Equals(password);
 
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["secretKey"]));
+            if (paswordIsCorrect)
+            {
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Value.SecretKey));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokeOptions = new JwtSecurityToken(
                     issuer: "http://localhost:5000",
                     audience: "http://localhost:5000",
                     claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
+                    expires: DateTime.Now.AddMinutes(60),
                     signingCredentials: signinCredentials
                 );
 
                 return new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            }
+            return "Password is incorrect";
         }
 
         public string RegisterUser(string userName, string password)

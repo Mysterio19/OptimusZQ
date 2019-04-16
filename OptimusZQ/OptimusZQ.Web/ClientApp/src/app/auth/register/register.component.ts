@@ -1,4 +1,5 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserService } from '../../_services/user.service';
 
 @Component({
     selector: 'app-register',
@@ -7,6 +8,8 @@
 })
 /** register component*/
 export class RegisterComponent {
+  model: any = {};
+
     /** register ctor */
     constructor() {
 

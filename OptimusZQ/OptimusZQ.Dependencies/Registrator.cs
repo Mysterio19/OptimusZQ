@@ -21,7 +21,7 @@ namespace OptimusZQ.Dependencies
         {
             services.AddDbContext<OptimusDbContext>(options =>
             options.UseSqlServer(connectionString));
-            services.AddTransient<IRepository<User>, UserRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
             //services.AddTransient<IRepository<Folder>, BaseRepository<Folder>>();
             //services.AddTransient<IRepository<SharedFile>, BaseRepository<SharedFile>>();   //todo
             //services.AddTransient<IRepository<File>, BaseRepository<File>>();
