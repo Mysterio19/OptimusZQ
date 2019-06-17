@@ -46,7 +46,7 @@ namespace OptimusZQ.Services.Concrete
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Value.SecretKey));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-                var tokeOptions = new JwtSecurityToken(
+                var tokenOptions = new JwtSecurityToken(
                     issuer: "http://localhost:5000",
                     audience: "http://localhost:5000",
                     claims: new List<Claim>(),
@@ -54,7 +54,7 @@ namespace OptimusZQ.Services.Concrete
                     signingCredentials: signinCredentials
                 );
 
-                return new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             }
             return null;
         }

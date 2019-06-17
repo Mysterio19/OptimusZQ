@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -41,12 +41,6 @@
   <ItemGroup>
     <ProjectReference Include="..\OptimusZQ.Dependencies\OptimusZQ.Dependencies.csproj" />
     <ProjectReference Include="..\OptimusZQ.Services\OptimusZQ.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Web.config">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

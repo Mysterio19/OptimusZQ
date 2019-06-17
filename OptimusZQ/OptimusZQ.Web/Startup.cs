@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using OptimusZQ.Dependencies;
+using OptimusZQ.Services;
 
 namespace OptimusZQ.Web
 {
@@ -25,13 +27,17 @@ namespace OptimusZQ.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.RegisterDAL(Configuration.GetSection("AppSettings").GetSection("connectionString").Value);
+            services.MapSettings(Configuration);
 
-            services.RegisterAuth(Configuration.GetSection("AppSettings").GetSection("secretKey").Value);
+            var settings = services.BuildServiceProvider().GetService<IOptions<AppSettings>>();
+
+            services.RegisterDAL(settings.Value.ConnectionString);
+
+            services.RegisterAuth(settings.Value.ValidIssuer,
+                settings.Value.ValidAudience,
+                settings.Value.SecretKey);
 
             services.RegisterServices();
-
-            services.MapSettings(Configuration);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
