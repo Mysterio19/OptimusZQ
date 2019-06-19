@@ -2,12 +2,10 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OptimusZQ.DAL.Abstract;
-using OptimusZQ.DAL.Models;
 using OptimusZQ.Services.Abstract;
 using OptimusZQ.Services.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -47,8 +45,8 @@ namespace OptimusZQ.Services.Concrete
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: "http://localhost:5000",
-                    audience: "http://localhost:5000",
+                    issuer: _options.Value.ValidIssuer,
+                    audience: _options.Value.ValidAudience,
                     claims: new List<Claim>(),
                     expires: DateTime.Now.AddMinutes(60),
                     signingCredentials: signinCredentials
