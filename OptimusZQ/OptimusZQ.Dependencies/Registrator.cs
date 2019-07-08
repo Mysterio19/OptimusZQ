@@ -10,6 +10,9 @@ using OptimusZQ.Services;
 using OptimusZQ.Services.Abstract;
 using OptimusZQ.Services.Concrete;
 using System.Text;
+#if DEBUG
+using Microsoft.IdentityModel.Logging;
+#endif
 
 namespace OptimusZQ.Dependencies
 {
@@ -30,6 +33,9 @@ namespace OptimusZQ.Dependencies
         public static void RegisterAuth(this IServiceCollection services, 
             string validIssuer, string validAudience, string secretKey)
         {
+#if DEBUG
+            IdentityModelEventSource.ShowPII = true;
+#endif
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters {

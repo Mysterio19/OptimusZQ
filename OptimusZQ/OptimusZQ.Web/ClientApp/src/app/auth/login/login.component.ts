@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // reset login status
     this.authService.logout();
-
+    this.returnUrl = "fetch-data";
   }
 
   login() {
