@@ -25,11 +25,11 @@ namespace OptimusZQ.Web.Controllers
             if(_authenticationService.HasUser(user.Login))
             {
                 var token = _authenticationService.LogIn(user.Login, user.Password);
-                var curentUser = _authenticationService.GetUserByUserLogin(user.Login);
+                var currentUser = _authenticationService.GetUserByUserLogin(user.Login);
 
                 if(token != null)
                 {
-                    return Ok(new { Token = token , User = curentUser });
+                    return Ok(new { Token = token , User = currentUser });
                 }
 
             }
