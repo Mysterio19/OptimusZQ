@@ -57,6 +57,7 @@ namespace OptimusZQ.Dependencies
                 settings.SecretKey = configuration.GetSection("AppSettings").GetSection("secretKey").Value;
                 settings.ValidIssuer = configuration.GetSection("AppSettings").GetSection("validIssuer").Value;
                 settings.ValidAudience = configuration.GetSection("AppSettings").GetSection("validAudience").Value;
+                settings.RoutesTemplatesPath = configuration.GetSection("RoutesTemplatesPath").Value;
             });
         }
     }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OptimusZQ.Dependencies;
 using OptimusZQ.Services;
+using OptimusZQ.Web.Routes;
 
 namespace OptimusZQ.Web
 {
@@ -40,7 +41,7 @@ namespace OptimusZQ.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<AppSettings> settings)
         {
             if (env.IsDevelopment())
             {
@@ -58,9 +59,7 @@ namespace OptimusZQ.Web
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                new RoutesConfigurator(routes, settings.Value.RoutesTemplatesPath).BuildRoutesUsingTemplates();
             });
         }
     }

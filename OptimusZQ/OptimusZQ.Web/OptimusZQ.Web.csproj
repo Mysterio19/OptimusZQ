@@ -18,5 +18,9 @@
     <ProjectReference Include="..\OptimusZQ.Dependencies\OptimusZQ.Dependencies.csproj" />
     <ProjectReference Include="..\OptimusZQ.Services\OptimusZQ.Services.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Routes\Templates\" />
+  </ItemGroup>
  
 </Project>
