@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OptimusZQ.Dependencies;
 using OptimusZQ.Services;
-using OptimusZQ.Web.Routes;
+using OptimusZQ.Web.AppStart;
 
 namespace OptimusZQ.Web
 {

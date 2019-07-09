@@ -1,0 +1,16 @@
+{
+  "rules": [
+    {
+      "name": "Root",
+      "controller": "Home",
+      "action": "Index",
+      "url": "Index/"
+    },
+    {
+      "name": "Root1",
+      "controller": "Home1",
+      "action": "Index1",
+      "url": "Index1/"
+    }
+]
+}
