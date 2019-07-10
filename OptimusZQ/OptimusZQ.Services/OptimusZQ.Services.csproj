@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OptimusZQ.Common\OptimusZQ.Common.csproj" />
     <ProjectReference Include="..\OptimusZQ.DAL\OptimusZQ.DAL.csproj" />
   </ItemGroup>
 

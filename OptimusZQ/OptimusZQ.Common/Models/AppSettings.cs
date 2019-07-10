@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OptimusZQ.Services
+namespace OptimusZQ.Common.Models
 {
     public class AppSettings
     {

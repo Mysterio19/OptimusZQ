@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using OptimusZQ.Common.Models;
 using OptimusZQ.Dependencies;
-using OptimusZQ.Services;
 using OptimusZQ.Web.AppStart;
 
 namespace OptimusZQ.Web

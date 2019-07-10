@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using OptimusZQ.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

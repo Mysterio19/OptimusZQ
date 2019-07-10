@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OptimusZQ.Common\OptimusZQ.Common.csproj" />
     <ProjectReference Include="..\OptimusZQ.Dependencies\OptimusZQ.Dependencies.csproj" />
     <ProjectReference Include="..\OptimusZQ.Services\OptimusZQ.Services.csproj" />
   </ItemGroup>
