@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OptimusZQ.Common.Models;
 using OptimusZQ.DAL.Abstract;
 using OptimusZQ.Services.Abstract;
 using OptimusZQ.Services.Dtos;
