@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /OptimusZQ/OptimusZQ.Web/ClientApp/package-lock.json
 /OptimusZQ/OptimusZQ.Web/ClientApp/README.md
+/OptimusZQ/OptimusZQ.Client/package-lock.json
