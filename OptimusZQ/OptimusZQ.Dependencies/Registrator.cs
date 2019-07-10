@@ -10,6 +10,7 @@ using OptimusZQ.Services;
 using OptimusZQ.Services.Abstract;
 using OptimusZQ.Services.Concrete;
 using System.Text;
+using OptimusZQ.Common.Models;
 #if DEBUG
 using Microsoft.IdentityModel.Logging;
 #endif
